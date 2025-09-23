@@ -45,13 +45,12 @@ function App() {
   const fetchDifficulties = async () => {
     setIsLoading(true);
     try {
-      // Исправлено: заменено localhost на относительный путь /api/difficulties
       const response = await axios.get('/api/difficulties');
       const fetchedDifficulties = response.data.difficulties;
       setDifficulties(fetchedDifficulties);
       setCurrentDescription(fetchedDifficulties.find(d => d.id === 'Открытый'));
       setError(null);
-    } catch (err) { // Исправлено: переменная 'error' переименована в 'err'
+    } catch (err) {
       console.error('Ошибка загрузки сложностей:', err);
       setError('Не удалось загрузить сложности с сервера. Используются резервные.');
       const fallbackDifficulties = [
@@ -83,7 +82,6 @@ function App() {
     setIsTyping(true);
 
     try {
-      // Исправлено: заменено localhost на относительный путь /api/chat
       const response = await axios.post('/api/chat', {
         history: updatedMessages,
         difficulty: difficulty
