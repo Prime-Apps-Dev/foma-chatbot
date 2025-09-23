@@ -343,6 +343,7 @@ function App() {
         </div>
       </header>
       <main className="chat-container">
+        {error && <div className="error-message">Error: {error}</div>}
         <div className="messages">
           {messages.map((msg, index) => (
             <div key={index} className={`message-container ${msg.sender}`}>
