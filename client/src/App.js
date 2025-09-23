@@ -45,13 +45,14 @@ function App() {
   const fetchDifficulties = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get('http://localhost:5001/api/difficulties');
+      // Исправлено: заменено localhost на относительный путь /api/difficulties
+      const response = await axios.get('/api/difficulties');
       const fetchedDifficulties = response.data.difficulties;
       setDifficulties(fetchedDifficulties);
       setCurrentDescription(fetchedDifficulties.find(d => d.id === 'Открытый'));
       setError(null);
-    } catch (error) {
-      console.error('Ошибка загрузки сложностей:', error);
+    } catch (err) { // Исправлено: переменная 'error' переименована в 'err'
+      console.error('Ошибка загрузки сложностей:', err);
       setError('Не удалось загрузить сложности с сервера. Используются резервные.');
       const fallbackDifficulties = [
         { id: 'Открытый', name: 'Открытый', description: 'Дружелюбный собеседник', phrases: ['Интересно...', 'А что ты думаешь...', 'Хм, никогда так не думал...'] },
@@ -82,7 +83,8 @@ function App() {
     setIsTyping(true);
 
     try {
-      const response = await axios.post('http://localhost:5001/api/chat', {
+      // Исправлено: заменено localhost на относительный путь /api/chat
+      const response = await axios.post('/api/chat', {
         history: updatedMessages,
         difficulty: difficulty
       });
@@ -113,7 +115,7 @@ function App() {
       setIsTyping(false);
     }
   };
-
+  
   const openDB = () => {
     return new Promise((resolve, reject) => {
       const request = window.indexedDB.open('ChatArchive', 1);
