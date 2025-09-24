@@ -4,8 +4,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import './App.css';
 
-// Получаем базовый URL API из переменной окружения
-const API_URL = process.env.REACT_APP_API_URL || '';
+// Прямой URL API-сервера для максимальной надёжности
+const API_URL = 'https://foma-chatbot.onrender.com';
 
 function App() {
   const [messages, setMessages] = useState([
