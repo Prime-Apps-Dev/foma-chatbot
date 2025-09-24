@@ -541,7 +541,6 @@ function App() {
                 Закрыть
               </button>
             </footer>
-            </footer>
           </div>
         </div>
       )}
