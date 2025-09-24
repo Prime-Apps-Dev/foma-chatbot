@@ -4,6 +4,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import './App.css';
 
+// Получаем базовый URL API из переменной окружения
+const API_URL = process.env.REACT_APP_API_URL || '';
+
 function App() {
   const [messages, setMessages] = useState([
     { text: 'Привет! Я твой AI-помощник. Чем могу помочь?', sender: 'model', timestamp: new Date().toLocaleTimeString() },
@@ -45,7 +48,8 @@ function App() {
   const fetchDifficulties = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get('/api/difficulties');
+      // ИСПРАВЛЕНО: используем полный URL
+      const response = await axios.get(`${API_URL}/api/difficulties`);
       const fetchedDifficulties = response.data.difficulties;
       setDifficulties(fetchedDifficulties);
       setCurrentDescription(fetchedDifficulties.find(d => d.id === 'Открытый'));
@@ -82,7 +86,8 @@ function App() {
     setIsTyping(true);
 
     try {
-      const response = await axios.post('/api/chat', {
+      // ИСПРАВЛЕНО: используем полный URL
+      const response = await axios.post(`${API_URL}/api/chat`, {
         history: updatedMessages,
         difficulty: difficulty
       });
@@ -535,6 +540,7 @@ function App() {
               <button className="close-button" onClick={() => { setIsChatViewModalOpen(false); setViewingChat(null); }}>
                 Закрыть
               </button>
+            </footer>
             </footer>
           </div>
         </div>
