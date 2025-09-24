@@ -1,11 +1,11 @@
 [build]
   base = "client"
-  publish = "build"      # not client/build
+  publish = "build"
   command = "npm run build"
 
 [[redirects]]
   from = "/api/*"
-  to = "https://foma-chatbot.onrender.com/"
+  to = "https://foma-chatbot.onrender.com/:splat"
   status = 200
   force = true
 
