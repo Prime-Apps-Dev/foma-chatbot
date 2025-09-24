@@ -9,7 +9,7 @@ const API_URL = 'https://foma-chatbot.onrender.com';
 
 function App() {
   const [messages, setMessages] = useState([
-    { text: 'Привет! Я твой AI-помощник. Чем могу помочь?', sender: 'model', timestamp: new Date().toLocaleTimeString() },
+    { text: 'Чтобы начать практику, отправь первое сообщение', sender: 'model', timestamp: new Date().toLocaleTimeString() },
   ]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
