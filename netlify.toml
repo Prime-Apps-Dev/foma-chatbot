@@ -1,11 +1,14 @@
-# Правило для перенаправления API-запросов на ваш бэкенд на Render
+[build]
+  base = "client"
+  publish = "client/build"
+  command = "npm run build"
+
 [[redirects]]
   from = "/api/*"
   to = "https://foma-chatbot.onrender.com/:splat"
   status = 200
   force = true
 
-# Правило для перенаправления всех остальных запросов на index.html
 [[redirects]]
   from = "/*"
   to = "/index.html"
