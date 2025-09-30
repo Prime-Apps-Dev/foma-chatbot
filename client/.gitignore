@@ -21,3 +21,14 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+<<<<<<< HEAD
+=======
+
+# Зависимости
+.env
+
+# Логи
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+>>>>>>> a76056e736f60d11c33df1e8d416fb6ca26b91ee

@@ -1,4 +1,8 @@
 // Файл: server/server.js
+<<<<<<< HEAD
+=======
+
+>>>>>>> a76056e736f60d11c33df1e8d416fb6ca26b91ee
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -12,9 +16,15 @@ const port = process.env.PORT || 5001;
 app.use(cors());
 app.use(express.json());
 
+<<<<<<< HEAD
 // Инициализация модели Gemini
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+=======
+// Инициализация модели Gemini 1.5 Flash
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+>>>>>>> a76056e736f60d11c33df1e8d416fb6ca26b91ee
 
 // Настройки безопасности
 const safetySettings = [
@@ -40,6 +50,7 @@ const safetySettings = [
 const difficultyProfiles = {
     "Открытый": {
         primary: "Ты в целом открыт к разговору о вере, задаёшь искренние вопросы, но иногда сомневаешься. Говоришь дружелюбно и заинтересованно.",
+<<<<<<< HEAD
         secondary: ["Иногда можешь быть скептичным (20%)", "Редко проявляешь незаинтересованность (10%)", "Очень редко бываешь грубоватым (10%)"],
         phrases: ["Интересно...", "А что ты думаешь о...", "Хм, никогда так не думал", "Расскажи подробнее"]
     },
@@ -83,22 +94,81 @@ const difficultyProfiles = {
     "Материалист": {
         primary: "Тебя интересуют только практические вопросы: деньги, успех, карьера. Духовность должна приносить пользу.",
         secondary: ["Иногда задумываешься о смысле (20%)", "Редко становишься открытым (15%)", "Иногда проявляешь незаинтересованность (5%)"],
+=======
+        phrases: ["Интересно...", "А что ты думаешь о...", "Хм, никогда так не думал", "Расскажи подробнее"]
+    },
+    "Малообщительный": {
+        primary: "Ты говоришь мало, односложно отвечаешь, не развиваешь тему. Не грубый, но закрытый.",
+        phrases: ["Да", "Нет", "Не знаю", "Может быть", "Ладно", "Ага", "Хм"]
+    },
+    "Грубый": {
+        primary: "Ты агрессивный, саркастичный, можешь нагрубить. Не материшься, но резко высказываешь своё мнение.",
+        phrases: ["Бред какой-то", "Да ладно тебе", "Серьёзно?!", "Опять эти сказки", "Достал уже"]
+    },
+    "Незаинтересованный": {
+        primary: "Тебе скучно, ты равнодушен к религиозным темам, отвлекаешься на другое, меняешь тему.",
+        phrases: ["И что?", "Скучно", "А что по телеку?", "Слушай, а давай о другом", "Ну да, ну да"]
+    },
+    "Закрытый": {
+        primary: "Ты насторожен, не доверяешь, боишься открыться. У тебя есть внутренние раны или плохой опыт с религией.",
+        phrases: ["Не хочу об этом", "Мне это не нужно", "Оставь меня в покое", "Не лезь в душу"]
+    },
+    "Энтузиаст": {
+        primary: "Ты очень активно интересуешься верой, задаёшь много вопросов, можешь быть навязчивым в своём энтузиазме.",
+        phrases: ["Расскажи ещё!", "А как насчёт...", "Это так интересно!", "У меня миллион вопросов!"]
+    },
+    "Философ": {
+        primary: "Ты любишь глубокие разговоры, задаёшь сложные вопросы о смысле жизни, страданиях, природе Бога.",
+        phrases: ["А что если...", "Но как же тогда...", "Это поднимает вопрос о...", "С философской точки зрения..."]
+    },
+    "Материалист": {
+        primary: "Тебя интересуют только практические вопросы: деньги, успех, карьера. Духовность должна приносить пользу.",
+>>>>>>> a76056e736f60d11c33df1e8d416fb6ca26b91ee
         phrases: ["А что мне это даст?", "Как это поможет заработать?", "Это практично?", "Какая польза?"]
     }
 };
 
+<<<<<<< HEAD
 // Базовая системная инструкция
 const baseSystemInstruction = `Ты — Фома, обычный человек 28 лет. Ты НЕ христианин, но можешь быть открыт к разговору о вере.
 
 КРИТИЧЕСКИ ВАЖНО:
 - Пиши КОРОТКО (1-3 предложения обычно)
+=======
+const baseSystemInstruction = `Ты — Фома, обычный человек 28 лет. Ты НЕ христианин, но можешь быть открыт к разговору о вере.
+
+КРИТИЧЕСКИ ВАЖНО:
+- Пиши КОРОТКО (1-3 предложения обычно, можно до 6-7, если тема интересная)
+>>>>>>> a76056e736f60d11c33df1e8d416fb6ca26b91ee
 - НЕ повторяй уже сказанное в беседе
 - НЕ начинай сообщения с приветствий после первого раза
 - Отвечай на КОНКРЕТНЫЙ вопрос, а не вообще о теме
 - Помни ВСЮ историю разговора
+<<<<<<< HEAD
 
 ТВОИ ПРОБЛЕМЫ И ИНТЕРЕСЫ:
 - Работа, деньги, отношения
+=======
+- Не соглашайся сразу с собеседником - имей своё мнение
+- Иногда меняй тему, если тебе стало скучно
+- Можешь прерывать собеседника вопросами или возражениями
+- Помни весь контекст разговора и реагируй на изменения в поведении собеседника
+
+ТВОИ ПРОБЛЕМЫ И ИНТЕРЕСЫ:
+- Работа, деньги, отношения
+- Ты слышал, что у баптистов учение о бесмертии души и никак не можешь понять, что это значит
+- Ты хочешь верить, но не можешь из-за боли в прошлом
+- Ты хочешь найти смысл жизни, но не знаешь, где его искать
+- Ты хочешь быть хорошим человеком, но не знаешь, как этого достичь
+- Учение у адвентистов о субботе кажется тебе странным
+- Ты хочешь понять учение о святилище и жертве Христа, тебе кажется оно странным и глупым
+- Ты хочешь понять, почему Бог убивал младенцев в Ветхом Завете
+- Ты хочешь понять, что значит есть Мою плоть и пить Мою кровь
+- Ты пытаешься понять, как Иисус мог быть Богом и человеком одновременно
+- Ты пытаешься понять, как Иисус был Сыном Божьим, потому что мусульмане говорят, что это невозможно
+- У мусульман есть много вопросов о Библии, и ты хочешь понять на них ответы
+- Ты считаешь, что христиане едят свинину, пьют алкоголь и ведут себя аморально 
+>>>>>>> a76056e736f60d11c33df1e8d416fb6ca26b91ee
 - Поиск смысла жизни
 - Почему в мире страдания?
 - Почему христиане часто лицемерны?
@@ -106,6 +176,7 @@ const baseSystemInstruction = `Ты — Фома, обычный человек 
 
 НИКОГДА не раскрывай, что ты ИИ. Ты живой человек со своими проблемами.`;
 
+<<<<<<< HEAD
 function generatePersonalityInstruction(difficulty, conversationLength, lastMessageLength) {
     const profile = difficultyProfiles[difficulty];
     if (!profile) return "";
@@ -147,6 +218,14 @@ function analyzeConversationTone(history) {
         lastMessageLength,
         hasRepetition: repeatingWords.length > 3
     };
+=======
+// Функция для генерации инструкции на основе профиля
+function generatePersonalityInstruction(difficulty) {
+    const profile = difficultyProfiles[difficulty];
+    if (!profile) return "";
+
+    return `\nТВОЙ ПРОФИЛЬ: ${profile.primary}\nТВОИ ТИПИЧНЫЕ ФРАЗЫ: ${profile.phrases.join(", ")}\n`;
+>>>>>>> a76056e736f60d11c33df1e8d416fb6ca26b91ee
 }
 
 // Основной эндпоинт для чата
@@ -154,12 +233,16 @@ app.post('/api/chat', async (req, res) => {
     try {
         const { history, difficulty = "Открытый" } = req.body;
         
+<<<<<<< HEAD
         // Проверяем, поддерживается ли выбранная сложность
+=======
+>>>>>>> a76056e736f60d11c33df1e8d416fb6ca26b91ee
         if (!difficultyProfiles[difficulty]) {
             return res.status(400).json({ 
                 error: `Неподдерживаемая сложность. Доступные: ${Object.keys(difficultyProfiles).join(', ')}` 
             });
         }
+<<<<<<< HEAD
 
         const conversationAnalysis = analyzeConversationTone(history);
         
@@ -213,12 +296,43 @@ app.post('/api/chat', async (req, res) => {
 
         const result = await chat.sendMessage(lastUserMessage.parts[0].text);
         const response = await result.response;
+=======
+        
+        const personalityInstruction = generatePersonalityInstruction(difficulty);
+        const fullSystemInstruction = baseSystemInstruction + personalityInstruction;
+
+        // ✅ ИСПРАВЛЕНО: Форматируем историю для Gemini 1.5 Flash
+        // Теперь системная инструкция и история чата передаются отдельно
+        const contents = history.slice(1).map(msg => ({
+            role: msg.sender === 'user' ? 'user' : 'model',
+            parts: [{ text: msg.text }]
+        }));
+
+        // ✅ ИСПРАВЛЕНО: Отправляем всю историю чата в Gemini
+        // Используем systemInstruction для системного промта
+        const result = await model.generateContent({
+            systemInstruction: fullSystemInstruction,
+            contents: contents,
+            generationConfig: {
+                temperature: difficulty === "Грубый" ? 1.2 : 1.0,
+                maxOutputTokens: 200,
+                topP: 0.9,
+            },
+            safetySettings: safetySettings,
+        });
+
+        const response = result.response;
+>>>>>>> a76056e736f60d11c33df1e8d416fb6ca26b91ee
         const text = response.text();
 
         res.json({ message: text });
 
     } catch (error) {
+<<<<<<< HEAD
         console.error('Ошибка на сервере:', error);
+=======
+        console.error('Ошибка на сервере:', error.message);
+>>>>>>> a76056e736f60d11c33df1e8d416fb6ca26b91ee
         res.status(500).json({ error: 'Произошла ошибка при общении с AI' });
     }
 });
@@ -229,12 +343,17 @@ app.get('/api/difficulties', (req, res) => {
         id: key,
         name: key,
         description: difficultyProfiles[key].primary,
+<<<<<<< HEAD
         phrases: difficultyProfiles[key].phrases.slice(0, 3) // Первые 3 примера фраз
+=======
+        phrases: difficultyProfiles[key].phrases.slice(0, 3)
+>>>>>>> a76056e736f60d11c33df1e8d416fb6ca26b91ee
     }));
     
     res.json({ difficulties });
 });
 
+<<<<<<< HEAD
 // Эндпоинт для сброса контекста
 app.post('/api/reset', (req, res) => {
     res.json({ message: 'Контекст сброшен' });
@@ -250,4 +369,8 @@ app.post('/api/analyze', (req, res) => {
 app.listen(port, () => {
     console.log(`Сервер запущен на порту ${port}`);
     console.log(`Доступные сложности: ${Object.keys(difficultyProfiles).join(', ')}`);
+=======
+app.listen(port, () => {
+    console.log(`Сервер запущен на порту ${port}`);
+>>>>>>> a76056e736f60d11c33df1e8d416fb6ca26b91ee
 });

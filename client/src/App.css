@@ -677,52 +677,51 @@ body {
   .header {
     padding: 12px 15px;
   }
-  
+
   .header-content {
     padding: 0;
   }
-  
+
   .user-details h1 {
     font-size: 18px;
   }
-  
+
   .avatar {
     width: 40px;
     height: 40px;
   }
-  
   .chat-container {
     margin: 10px;
     border-radius: 15px;
     height: calc(100vh - 140px);
   }
-  
+
   .messages {
     padding: 15px;
   }
-  
+
   .message {
     max-width: 85%;
   }
-  
+
   .bubble {
     padding: 12px 16px;
   }
-  
+
   .input-container {
     padding: 15px;
   }
-  
+
   .modal {
     margin: 20px;
     width: auto;
     max-height: 70vh;
   }
-  
+
   .modal-content {
     padding: 15px;
   }
-  
+
   .modal-header, .modal-footer {
     padding: 15px;
   }
@@ -732,50 +731,46 @@ body {
   .header-actions {
     gap: 4px;
   }
-  
   .icon-button {
     width: 36px;
     height: 36px;
   }
-  
   .send-button {
     width: 40px;
     height: 40px;
   }
-  
   .message-input {
     font-size: 14px;
     padding: 10px 14px;
   }
-  
   .bubble {
     padding: 10px 14px;
     font-size: 15px;
   }
 }
 
-/* --- Кастомные скроллбары для Firefox --- */
+/* Кастомные скроллбары для Firefox */
 .messages {
   scrollbar-width: thin;
   scrollbar-color: rgba(39, 133, 255, 0.3) transparent;
 }
 
-/* --- Высокая контрастность --- */
+/* Высокая контрастность */
 @media (prefers-contrast: high) {
   .bubble {
     border: 2px solid;
   }
-  
+
   .message.user .bubble {
     border-color: #ffffff;
   }
-  
+
   .message.model .bubble {
     border-color: #2785ff;
   }
 }
 
-/* --- Уменьшенная анимация для пользователей с ограниченными возможностями --- */
+/* Уменьшенная анимация для пользователей с ограниченными возможностями */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
@@ -784,34 +779,89 @@ body {
   }
 }
 
-/* --- Стили для модальных окон архива --- */
-.archive-controls {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
-  justify-content: flex-start; /* Выравнивание по левому краю для лучшей читаемости */
-  align-items: center;
+/* Дополнительные утилиты */
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
 }
 
-.archive-controls button,
-.archive-controls .button-upload {
-  padding: 10px 15px;
+.error {
+  border: 2px solid #ff4757 !important;
+  background: rgba(255, 71, 87, 0.05) !important;
+}
+
+.success {
+  border: 2px solid #2ed573 !important;
+  background: rgba(46, 213, 115, 0.05) !important;
+}
+
+/* Новые стили для предпросмотра и экспорта */
+
+.export-modal {
+  max-width: 800px;
+}
+
+.export-preview-content {
+  overflow-y: auto;
+  max-height: 500px;
+  padding: 20px;
+  background-color: #f5f5f5;
   border-radius: 8px;
+  font-family: monospace;
   font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  border: none; /* Убираем стандартную границу */
+  line-height: 1.5;
 }
 
-/* Новые стили для кнопок архива */
-.archive-controls .save-button {
-  background: var(--primary-gradient);
+.export-preview-content pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin: 0;
+}
+
+.export-modal {
+  max-width: 800px;
+}
+
+.export-preview-content {
+  overflow-y: auto;
+  max-height: 500px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.export-preview-content pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin: 0;
+  color: #333;
+}
+
+.export-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.button-upload {
+  background: #2785ff;
   color: white;
-  box-shadow: var(--shadow-primary);
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(39, 133, 255, 0.3);
+  display: inline-block;
 }
 
-.archive-controls .save-button:hover {
+.button-upload:hover {
+  background: #1a73e8;
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(39, 133, 255, 0.4);
 }
