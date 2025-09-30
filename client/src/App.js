@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { Send, Settings, X, RotateCcw, User, Save, Folder, Download } from 'lucide-react';
+import { Send, Settings, X, RotateCcw, Save, Folder, Download } from 'lucide-react';
 import './App.css';
 
 // Прямой URL API-сервера
@@ -259,42 +259,6 @@ function App() {
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
-  };
-
-  const handleExportAllChats = async () => {
-    setDbStatus('Экспортирую все чаты... Пожалуйста, подождите.');
-    try {
-      const db = await openDB();
-      const transaction = db.transaction(['chats'], 'readonly');
-      const objectStore = transaction.objectStore('chats');
-      const request = objectStore.getAll();
-
-      request.onsuccess = (event) => {
-        const allChats = event.target.result;
-        const chatData = {
-          exportedChats: allChats,
-          exportTimestamp: new Date().toISOString()
-        };
-        const jsonString = JSON.stringify(chatData, null, 2);
-        const blob = new Blob([jsonString], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = `chat_archive_export_${new Date().toISOString()}.json`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-        setDbStatus('Экспорт завершен!');
-      };
-
-      transaction.oncomplete = () => {
-        db.close();
-      };
-    } catch (err) {
-      setDbStatus('Ошибка экспорта.');
-      console.error('Ошибка при экспорте всех чатов:', err);
-    }
   };
 
   const handleViewSavedChat = (chat) => {
