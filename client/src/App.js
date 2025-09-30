@@ -5,8 +5,8 @@ import axios from 'axios';
 import { Send, Settings, X, RotateCcw, Save, Folder, Download } from 'lucide-react';
 import './App.css';
 
-// Прямой URL API-сервера
-const API_URL = 'http://localhost:5001';
+// Прямой URL API-сервера, теперь использует переменную окружения
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
 
 function App() {
   const [messages, setMessages] = useState([
@@ -201,7 +201,7 @@ function App() {
     try {
       const db = await openDB();
       const transaction = db.transaction(['chats'], 'readwrite');
-      const objectStore = transaction.objectStore('chats');
+      const objectStore = db.transaction(['chats'], 'readwrite').objectStore('chats');
       const request = objectStore.delete(chatId);
 
       request.onsuccess = () => {
